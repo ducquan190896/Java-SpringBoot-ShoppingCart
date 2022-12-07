@@ -58,7 +58,7 @@ public class ShoppingcartApplication {
 			// System.out.println(cartRepos.findCartByAccount(quan).get());
 			// System.out.println(cartRepos.findCartByItems(shirt));
 			
-			System.out.println(orderService.placeOrderFromCart(quan.getId()));
+			// System.out.println(orderService.placeOrderFromCart(quan.getId()));
 			
 		};
 	}

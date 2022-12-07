@@ -115,6 +115,7 @@ public class CartServiceImp implements CartService {
         Account account = entityAccount.get();
         Cart cart = account.getCart();
         cart.setItems(new ArrayList<>());
+        cart.setTotalprice(0);
         cartRepos.save(cart);
         accountRepos.save(account);
 
