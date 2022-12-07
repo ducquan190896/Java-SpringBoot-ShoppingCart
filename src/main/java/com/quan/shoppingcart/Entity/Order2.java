@@ -28,17 +28,17 @@ public class Order2 {
         strategy = GenerationType.SEQUENCE,
         generator = "order2_sequence"
     )
-     @Column(name = "id", updatable = false)
+     @Column(name = "id")
     private Long id;
     @Min(value = 0, message = "total price of all items must be higher than equals to 0")
-    @Column(name = "totalprice", nullable = false)
+    @Column(name = "totalprice")
     private double totalprice;
 
     @ManyToOne()
     @JoinColumn(name = "account_id", referencedColumnName = "id")
     private Account account;
 
-    @ManyToMany
+    @ManyToMany()
     @JoinTable(
         name = "order_item",
         joinColumns = @JoinColumn(name = "order_id", referencedColumnName = "id"),
@@ -58,17 +58,17 @@ public class Order2 {
 
 
 
-    public Order2 placeOrderFromCart(Account account) {
-        Cart cart = account.getCart();
-        double totalprice = cart.getTotalprice();
-        List<Item> items = cart.getItems();
+    // public void placeOrderFromCart(Account account) {
+    //     Cart cart = account.getCart();
+    //     double totalprice = cart.getTotalprice();
+    //     List<Item> items = cart.getItems();
 
-        Order2 order = new Order2();
-        order.setOrderItems(items);
-        order.setAccount(account);
-        order.setTotalprice(totalprice);
-        return order;
-    }
+        
+    //     this.setOrderItems(items);
+    //     this.setAccount(account);
+    //     this.setTotalprice(totalprice);
+       
+    // }
 
 
 

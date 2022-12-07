@@ -1,5 +1,6 @@
 package com.quan.shoppingcart.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.quan.shoppingcart.Entity.Account;
 import com.quan.shoppingcart.Entity.Cart;
+import com.quan.shoppingcart.Entity.Item;
 import com.quan.shoppingcart.Entity.Order;
 import com.quan.shoppingcart.Entity.Order2;
 import com.quan.shoppingcart.Exception.EntityNotFoundException;
@@ -27,8 +29,13 @@ public class OrderServiceImp implements OrderService {
 
     @Override
     public void deleteOrder(Long orderId) {
-        // TODO Auto-generated method stub
+      Optional<Order2> entity = orderRepos.findById(orderId);
+      if(!entity.isPresent()) {
         
+        throw new EntityNotFoundException("the order with id " + orderId + " not found");
+      }
+      Order2 order = entity.get();
+        orderRepos.delete(order);
     }
 
     @Override
@@ -55,10 +62,20 @@ public class OrderServiceImp implements OrderService {
           throw new EntityNotFoundException("the account with id " + accountId + " not found" );
   
         }
+        
+        Order2 order = new Order2();
         Account account = entity.get();
         Cart cart = account.getCart();
-        Order2 order = new Order2(cart.getTotalprice(), account, cart.getItems());
+        order.setAccount(account);
+        order.setTotalprice(cart.getTotalprice());
+       List<Item> items = cart.getItems();
+        List<Item> itemsOrder = new ArrayList<>();
+        if(items.size() > 0) {
+            items.stream().forEach(ite -> itemsOrder.add(ite));
+        }
+        order.setOrderItems(itemsOrder);
        return orderRepos.save(order);
+   
     }
 
     @Override
@@ -72,8 +89,25 @@ public class OrderServiceImp implements OrderService {
 
     @Override
     public Order2 updateOrder(Long orderId) {
-        // TODO Auto-generated method stub
-        return null;
+        Optional<Order2> entity = orderRepos.findById(orderId);
+        if(!entity.isPresent()) {
+          
+          throw new EntityNotFoundException("the order with id " + orderId + " not found");
+        }
+        Order2 order = entity.get();
+
+        Account account = order.getAccount();
+
+        Cart cart = account.getCart();
+        order.setAccount(account);
+        order.setTotalprice(cart.getTotalprice());
+       List<Item> items = cart.getItems();
+        List<Item> itemsOrder = new ArrayList<>();
+        if(items.size() > 0) {
+            items.stream().forEach(ite -> itemsOrder.add(ite));
+        }
+        order.setOrderItems(itemsOrder);
+       return orderRepos.save(order);
     }
     
 }
