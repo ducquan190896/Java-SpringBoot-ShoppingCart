@@ -40,6 +40,10 @@ public class Account {
     @Column(name = "password", nullable = false)
     private String password;
 
+    @Enumerated(EnumType.STRING)
+    @Column(name = "role", nullable = false)
+    private Role role;
+
     @JsonIgnore
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     @JoinColumn(name = "cart_id", referencedColumnName = "id")
@@ -52,10 +56,18 @@ public class Account {
     public Account( String username, String password) {
         this.username = username;
         this.password = password;
+        this.role = role.USER;
     }
+    public Account( String username, String password, Role role) {
+        this.username = username;
+        this.password = password;
+        this.role = role;
+    }
+    
     public Account( String username, String password, Cart cart) {
         this.username = username;
         this.password = password;
+        this.role = role.USER;
         this.cart = cart;
     }
 

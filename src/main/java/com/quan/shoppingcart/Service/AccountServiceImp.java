@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.quan.shoppingcart.Entity.Account;
 import com.quan.shoppingcart.Entity.Cart;
+import com.quan.shoppingcart.Entity.Role;
 import com.quan.shoppingcart.Entity.Request.AccountRequest;
 import com.quan.shoppingcart.Exception.EntityNotFoundException;
 import com.quan.shoppingcart.Repository.AccountRepos;
@@ -31,6 +32,7 @@ public class AccountServiceImp implements AccountService {
         account.setPassword(new BCryptPasswordEncoder().encode(accountRequest.getPassword()));
         Cart cart = new Cart();
         account.setCart(cart);
+        account.setRole(Role.USER);
         accountRepos.save(account);
         
         

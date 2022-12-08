@@ -4,10 +4,12 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import com.quan.shoppingcart.Entity.Account;
 import com.quan.shoppingcart.Entity.Cart;
 import com.quan.shoppingcart.Entity.Item;
+import com.quan.shoppingcart.Entity.Role;
 import com.quan.shoppingcart.Repository.AccountRepos;
 import com.quan.shoppingcart.Repository.CartRepos;
 import com.quan.shoppingcart.Repository.ItemRepos;
@@ -26,10 +28,10 @@ public class ShoppingcartApplication {
 		return args -> {
 
 
-			Account quan = new Account("quan", "123456");
+			Account quan = new Account("quan", new BCryptPasswordEncoder().encode("123456"));
 			
-			Account Khanh = new Account("khanh", "123456");
-			
+			Account Khanh = new Account("khanh",  new BCryptPasswordEncoder().encode("123456"));
+			quan.setRole(Role.ADMIN);
 			accountRepos.save(quan);
 			accountRepos.save(Khanh);
 
@@ -54,9 +56,9 @@ public class ShoppingcartApplication {
 
 			cart2.addItem(shirt2);
 			cartRepos.save(cart2);
-			// System.out.println(cart1.getItems());
-			// System.out.println(cartRepos.findCartByAccount(quan).get());
-			// System.out.println(cartRepos.findCartByItems(shirt));
+			System.out.println(cart1.getItems());
+			System.out.println(cartRepos.findCartByAccount(quan).get());
+			System.out.println(cartRepos.findCartByItems(shirt));
 			
 			// System.out.println(orderService.placeOrderFromCart(quan.getId()));
 			
