@@ -28,7 +28,7 @@ public class ShoppingcartApplication {
 	// 	return args -> {
 
 
-	// 		// Account quan = new Account("quan", new BCryptPasswordEncoder().encode("123456"));
+			Account quan = new Account("quan", new BCryptPasswordEncoder().encode("123456"));
 			
 	// 		// Account Khanh = new Account("khanh",  new BCryptPasswordEncoder().encode("123456"));
 	// 		// quan.setRole(Role.ADMIN);
