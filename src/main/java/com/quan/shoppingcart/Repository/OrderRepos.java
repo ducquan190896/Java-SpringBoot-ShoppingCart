@@ -6,7 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import com.quan.shoppingcart.Entity.Account;
-import com.quan.shoppingcart.Entity.Order;
 import com.quan.shoppingcart.Entity.Order2;
 
 @Repository

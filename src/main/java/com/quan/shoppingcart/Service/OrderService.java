@@ -3,7 +3,7 @@ package com.quan.shoppingcart.Service;
 import java.util.List;
 
 import com.quan.shoppingcart.Entity.Account;
-import com.quan.shoppingcart.Entity.Order;
+
 import com.quan.shoppingcart.Entity.Order2;
 
 public interface OrderService {
